@@ -63,7 +63,17 @@ However, it can also involve more complex statistical methods. Either way, the g
 
 By tracking these metrics, you can get a better understanding of your sales performance and identify areas where you can improve.
 
-I would like to analyze the sales and order dataset for the fictitious company Northwind Traders, which was created by [Maven Analytics](https://mavenanalytics.io/data-playground). 
-The dataset contains information on customers, orders, products, order_details, employees,categories and shippers. I would like to use this data to identify trends in sales, customer behavior, and product popularity. 
+I would like to analyze the sales and order dataset for the fictitious gourmet food supplier company Northwind Traders, which was created by [Maven Analytics](https://mavenanalytics.io/data-playground). 
+The dataset contains information on customers, products, orders, shippers, and employees. I would like to use this data to identify trends in sales, customer behavior, and product popularity. 
 This information could be used to improve the company's sales and marketing strategies.
+
+## Steps involved to ensure good analysis: 
+
+* Data Cleaning and Preprocessing:
+
+This involves identifying and correcting any errors in the data, removing any duplicate or irrelevant data, and transforming the data into a format that is easy to analyze.
+
+   -	Checking for Null and Duplicates
+   
+Our dataset has been carefully cleaned and processed to ensure high data quality. We have taken steps to remove any missing values, ensuring that all the required information is present for each record. Additionally, we have meticulously checked for and eliminated any duplicate entries, ensuring that each entry in the dataset is unique. By addressing these issues, we can confidently state that our data is complete and free from any missing values or duplicate records.
 
