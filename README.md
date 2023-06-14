@@ -69,11 +69,97 @@ This information could be used to improve the company's sales and marketing stra
 
 ## Steps involved to ensure good analysis: 
 
-* Data Cleaning and Preprocessing:
+1. Data Cleaning and Preprocessing: This involves identifying and correcting any errors in the data, removing any duplicate or irrelevant data, and transforming the data into a format that is easy to analyze.
 
-This involves identifying and correcting any errors in the data, removing any duplicate or irrelevant data, and transforming the data into a format that is easy to analyze.
+    * Checking for Null values
+    
+```sql
+    -- Checking for null values
+SELECT COUNT(*) 
+FROM orders 
+WHERE orderID IS NULL;
+SELECT COUNT(*) 
+FROM order_details 
+WHERE orderID IS NULL;
+SELECT COUNT(*) 
+FROM customers 
+WHERE customerID IS NULL;
+SELECT COUNT(*) 
+FROM products 
+WHERE productID IS NULL;
+SELECT COUNT(*) 
+FROM categories 
+WHERE categoryID IS NULL;
+SELECT COUNT(*) 
+FROM employees 
+WHERE employeeID IS NULL;
+SELECT COUNT(*) 
+FROM shippers 
+WHERE shipperID IS NULL;
+```
+ Output:
+ 
+![no null](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/5c05bf37-2ed7-4eb4-a7de-41ff233d3842)
+    
+    * Checking for Duplicate values 
+```sql
+-- Checking for duplicate values
+SELECT COUNT(*) 
+FROM orders;
 
-   -	Checking for Null and Duplicates
+SELECT COUNT(*)
+FROM (SELECT DISTINCT orderID, customerID,employeeID,orderDate
+                    ,requiredDate,shippedDate,shipperID,freight
+       FROM orders) AS unique_orders;
+
+SELECT COUNT(*) 
+FROM categories;
+
+SELECT COUNT(*)
+FROM (SELECT DISTINCT categoryID, categoryName,description
+       FROM categories) AS unique_categories;
+
+SELECT COUNT(*) 
+FROM customers;
+
+SELECT COUNT(*)
+FROM (SELECT DISTINCT customerID,companyName,contactName,contactTitle,city,country
+       FROM customers) AS unique_customers;	 
+	   
+SELECT COUNT(*) 
+FROM employees;
+
+SELECT COUNT(*)
+FROM (SELECT DISTINCT  employeeID,employeeName,title,city,country,reportsTo
+       FROM employees) AS unique_employees;	 
+
+SELECT COUNT(*) 
+FROM order_details;
+
+SELECT COUNT(*)
+FROM (SELECT DISTINCT  orderID,productID,unitPrice,quantity,discount
+       FROM order_details) AS unique_order_details;	 
+
+SELECT COUNT(*) 
+FROM products;
+
+SELECT COUNT(*)
+FROM (SELECT DISTINCT productID,productName,quantityPerUnit,unitPrice,discontinued,categoryID  
+       FROM products) AS unique_products;	 
+
+SELECT COUNT(*) 
+FROM shippers;
+
+SELECT COUNT(*)
+FROM (SELECT DISTINCT shipperID,companyName 
+       FROM shippers) AS unique_shippers;
+```
+Output:
+
+![dup2](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/232a8170-da6a-42dd-974b-8fd4a3c63b76)
+![dup](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/e4f721ee-ec69-4d71-8d01-4af63c1b5af1)
+![dup3](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/d8482395-6091-4ed5-ae9d-c4b5340732bf)
+![dup4](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/c2d5809a-8bd4-4f03-ac87-82ef0046f48a)
    
 Our dataset has been carefully cleaned and processed to ensure high data quality. We have taken steps to remove any missing values, ensuring that all the required information is present for each record. Additionally, we have meticulously checked for and eliminated any duplicate entries, ensuring that each entry in the dataset is unique. By addressing these issues, we can confidently state that our data is complete and free from any missing values or duplicate records.
 
