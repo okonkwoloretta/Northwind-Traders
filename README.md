@@ -61,4 +61,9 @@ However, it can also involve more complex statistical methods. Either way, the g
 
 •	Customer lifetime value: This is the total amount of money that a customer is expected to spend with your business over their lifetime.
 
-By tracking these metrics, you can get a better understanding of your sales performance and identify areas where you can improve
+By tracking these metrics, you can get a better understanding of your sales performance and identify areas where you can improve.
+
+I would like to analyze the sales and order dataset for the fictitious company Northwind Traders, which was created by [Maven Analytics](https://mavenanalytics.io/data-playground). 
+The dataset contains information on customers, orders, products, order_details, employees,categories and shippers. I would like to use this data to identify trends in sales, customer behavior, and product popularity. 
+This information could be used to improve the company's sales and marketing strategies.
+
