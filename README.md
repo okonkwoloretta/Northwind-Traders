@@ -428,9 +428,6 @@ LAZYK|	0.970000004768372|
 LAUGB|	0.544258927447455|
 
 
-
-
-
 we can observe the following:
 
 - The average order quantity varies among customers, ranging from 5 to 44 units. This indicates that certain customers consistently place larger orders compared to others.
@@ -439,16 +436,21 @@ we can observe the following:
 
 - The average freight cost per unit quantity also varies among customers, ranging from 0.97 to 9.30. This metric helps assess the relationship between order quantity and freight cost.
 
-
-
-
-
-There is variation in the average freight cost per unit quantity among customers. Some customers have relatively low average costs, while others have higher average costs.
-
-Customers such as LAUGB and FAMIA have very low average freight costs per unit quantity, indicating that their shipping costs are generally low compared to the quantity of products ordered.
-
-On the other hand, customers like FOLIG have a significantly higher average freight cost per unit quantity, suggesting that their shipping costs are relatively high compared to the quantity of products ordered.
-
-There are customers with moderate average freight costs per unit quantity, such as BLONP, SEVES, OLDWO, MAGAA, etc.
+- There is variation in the average freight cost per unit quantity among customers. Some customers have relatively low average costs, while others have higher average costs.
 
 It is important to note that other factors, such as the distance of shipping, shipping methods, packaging, and other logistical considerations, may also impact the freight costs. These factors are not taken into account in the provided data.
+
+If we consider the average order quantity and average freight cost per unit quantity among the customers, there don't seem to be any customers who stand out as extreme or unusual compared to the rest. The values for these metrics vary to some extent, indicating natural differences in customer ordering patterns and associated freight costs. However, there are no clear indications of customers with significantly higher or lower values that would be considered outliers.
+
+2. Perform exploratory data analysis (EDA) like answering some questions to drive insights from our dataset:
+
+- Which products have the highest sales revenue? Are there any specific product categories that contribute significantly to the overall revenue?
+What is the distribution of order quantities? Are there any patterns or trends?
+Which customers have the highest number of orders? Are there any loyal or frequent customers?
+Is there a correlation between the unit price of a product and its sales quantity?
+How does the freight cost vary across different regions or countries?
+Can we identify any seasonal trends in sales? Are there specific months or periods where sales are consistently higher?
+Is there a relationship between the discount offered and the quantity of products ordered?
+Are there any outliers in terms of order quantities or sales revenue?
+What is the average shipping time for orders?
+Can we identify any sales trends or patterns over time?
