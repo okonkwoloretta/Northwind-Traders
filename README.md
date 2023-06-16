@@ -179,13 +179,15 @@ WHERE TABLE_NAME = 'shippers';
 ```
 Output:
 
-![datatype order details](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/d069b2af-0347-4fac-b287-c15a5c178ce1)
-![datatype orders](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/862f51cd-47ca-4f71-8f51-3682eaa6004d)
-![datatype products](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/c62faf9e-2037-4e9d-9ec9-541820d31298)
-![datatype shippers](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/dc8a000f-ef1b-459e-ba56-bcc2524a48d9)
-![datatype categories](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/a8c3e4e9-ba06-4edb-9dea-9efc967d87ab)
-![datatype customers](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/93a196d4-442c-4dcb-b182-84e765362836)
-![datatype employees](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/2596a8fa-6c75-4c8d-9d08-d16e97645f0c)
+ Orders table     |Products Table     | Shippers Table     | Categories Table      |
+|--------------|--------------|--------------|--------------|
+![datatype orders](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/862f51cd-47ca-4f71-8f51-3682eaa6004d)|![datatype products](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/c62faf9e-2037-4e9d-9ec9-541820d31298)|![datatype shippers](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/dc8a000f-ef1b-459e-ba56-bcc2524a48d9)|![datatype categories](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/a8c3e4e9-ba06-4edb-9dea-9efc967d87ab)|    
+
+ Orders_details table     |Customers Table     | Employees Table 
+|--------------|--------------|--------------|
+![datatype order details](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/d069b2af-0347-4fac-b287-c15a5c178ce1)|![datatype customers](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/93a196d4-442c-4dcb-b182-84e765362836)|![datatype employees](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/2596a8fa-6c75-4c8d-9d08-d16e97645f0c)|
+
+
 
 
 
