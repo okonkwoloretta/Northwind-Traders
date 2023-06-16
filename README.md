@@ -188,6 +188,7 @@ Output:
 
 Hint:
 Our dataset has been carefully structured and validated to ensure that each column contains data in the appropriate format. We have taken the necessary steps to verify that all data types are correctly assigned to their respective columns. By ensuring the data is in its correct data type, we can confidently analyze and interpret the dataset accurately.
+
 ------------------
 
 ```sql
@@ -201,8 +202,8 @@ WHERE o.freight > (SELECT AVG(freight) + 3 * STDEV(freight)
 ORDER BY o.customerID 
 ```
 Output:
-orderID     |customerID| orderDate  | quantity |unitPrice|freight
-|--------------|--------------|-----|---------|--------------|--------------|--------------|
+|orderID     |customerID| orderDate  | quantity |unitPrice|freight|
+|------------|----------|------------|----------|---------|--------------|
 10430|	ERNSH|	2014-01-30|	45|	31.2000007629395|	458.779998779297
 10430|	ERNSH|	2014-01-30|	50|	8|	                458.779998779297
 10430|	ERNSH|	2014-01-30|	30|	30.3999996185303|	458.779998779297
@@ -227,7 +228,7 @@ orderID     |customerID| orderDate  | quantity |unitPrice|freight
 10816|	GREAL|	2015-01-06|	20|	49.2999992370605|	719.780029296875
 10897|	HUNGO|	2015-02-19|	80|	123.790000915527|	603.539978027344
 10897|	HUNGO|	2015-02-19|	36|	25.8899993896484|	603.539978027344
-10912|	HUNGO|	2015-02-26|	40|	21|	                |580.909973144531
+10912|	HUNGO|	2015-02-26|	40|	21|	                580.909973144531
 10912|	HUNGO|	2015-02-26|	60|	123.790000915527|	580.909973144531
 10372|	QUEEN|	2013-12-04|	12|	64.8000030517578|	890.780029296875
 10372|	QUEEN|	2013-12-04|	40|	210.800003051758|	890.780029296875
@@ -237,7 +238,7 @@ orderID     |customerID| orderDate  | quantity |unitPrice|freight
 10691|	QUICK|	2014-10-03|	40|	123.790000915527|	810.049987792969
 10691|	QUICK|	2014-10-03|	40|	46|	                810.049987792969
 10691|	QUICK|	2014-10-03|	24|	19.4500007629395|	810.049987792969
-10691|	QUICK|	2014-10-03|	48|	49.2999992370605||	810.049987792969
+10691|	QUICK|	2014-10-03|	48|	49.2999992370605|	810.049987792969
 10540|	QUICK|	2014-05-19|	60|	10|	                1007.64001464844
 10540|	QUICK|	2014-05-19|	40|	31.2299995422363|	1007.64001464844
 10540|	QUICK|	2014-05-19|	30|	263.5|	                1007.64001464844
