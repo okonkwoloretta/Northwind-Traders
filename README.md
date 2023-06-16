@@ -629,5 +629,164 @@ Output:
 
 | Yearly Sales Trend|
 |-----------|
-![yearly sales](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/6b485bd0-f63f-42ac-93a6-973b4217f7d4)
+|![yearly sales](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/8b704f16-0819-4246-bfc0-caa98f9c0038)|
+
+## Insight:
+- There seems to be a consistent pattern of higher sales during certain months. For example, sales tend to be higher in the last quarter of the year (October to December). 
+This could be attributed to holiday seasons or promotional campaigns during that period.
+
+- Sales show variations across different years. It's important to examine the factors that contributed to the significant increase in sales from 2013 to 2014, particularly in the months of January, April, and December.
+--------
+
+```sql
+--- 7.  best and worst selling products
+SELECT
+    products.productName,
+    SUM(order_details.quantity) AS totalQuantity
+FROM order_details
+INNER JOIN products 
+	ON order_details.productID = products.productID
+GROUP BY products.productName
+ORDER BY totalQuantity DESC;
+```
+Output:
+| Top and Bottom Products sold|
+|-----------|
+|![top bottom products sold](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/c63bb81c-00f5-4893-8c7c-49bbc376a185)|           
+
+## Insights:
+
+- The best-selling products are "Camembert Pierrot," "Raclette Courdavault," and "Gorgonzola Telino." These products have the highest total quantity sold.
+
+- The worst-selling products are "Gravad lax," "Genen Shouyu," and "Mishi Kobe Niku." These products have the lowest total quantity sold.
+
+## Recommendations:
+
+- Focus on promoting and highlighting the best-selling products to further increase their sales. Consider offering special deals or discounts on these products to attract more customers.
+
+- Analyze the reasons behind the low sales of the worst-performing products. Evaluate their demand and popularity among customers. It may be necessary to assess the product quality, marketing strategies, or customer preferences to understand why they are not selling well.
+
+- Identify potential opportunities for cross-selling or upselling. Look for products that are frequently purchased together with the best-selling items. Promote these complementary products to customers who are already interested in the popular items, increasing the chances of additional sales.
+
+- Consider introducing new products that align with market trends and customer demands while phasing out or repositioning underperforming products.
+
+- Collaborate with key customers to understand their specific needs and preferences. Develop tailored marketing campaigns or loyalty programs to strengthen relationships and drive repeat business.
+
+- Monitor competitors' products and pricing strategies. Stay competitive by offering unique value propositions, competitive pricing, or additional services to attract customers.
+------
+
+```sql
+--- 8. Key customers
+SELECT customers.customerID,
+    customers.companyName,
+    SUM(order_details.quantity * order_details.unitPrice) AS totalSales 
+FROM orders
+INNER JOIN  customers
+    ON orders.customerID = customers.customerID
+INNER JOIN order_details
+     ON orders.orderID = order_details.orderID
+GROUP BY customers.customerID,
+    customers.companyName    
+ORDER BY totalSales DESC;
+```
+Output:
+| Top and Bottom Products sold|
+|-----------|
+|![Key customers](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/ba8b8cf4-005b-4d98-9d19-74dba9d0a1b6)|
+
+## Insights:
+
+- The top key customers based on total sales are "QUICK-Stop," "Save-a-lot Markets," and "Ernst Handel." These customers have the highest total sales.
+
+- The lowest key customers based on total sales are "Galería del gastrónomo," "North/South,", "Laughing Bacchus Wine Cellars" and "Centro comercial Moctezuma". These customers have the lowest total sales.
+
+## Recommendations:
+
+- Nurture and strengthen relationships with the top key customers to encourage repeat business. Offer personalized promotions, discounts, or loyalty programs to incentivize them to continue purchasing from your company.
+
+- Analyze the sales patterns and preferences of the top key customers to identify potential cross-selling or upselling opportunities. Understand their specific needs and recommend complementary products or services that align with their purchasing history.
+
+- Investigate the reasons behind the lower sales of the lowest key customers. Reach out to them to gather feedback and understand their concerns or reasons for not making frequent purchases. Consider offering special incentives or tailored solutions to encourage them to increase their engagement.
+
+- Identify potential growth opportunities among the mid-tier customers. These customers may have the potential to become key customers with the right nurturing and targeted marketing efforts. Develop strategies to engage them further and increase their sales volume.
+
+- Consider organizing customer appreciation events or exclusive networking opportunities to foster stronger relationships with key customers. Such events can create a platform for collaboration, feedback sharing, and strengthening partnerships.
+------
+
+```sql
+--- 9. Determine if shipping costs are consistent across providers
+SELECT
+    shippers.companyName AS shipper,
+    AVG(orders.freight) AS averageFreight
+FROM orders   
+INNER JOIN  shippers
+    ON orders.shipperID = shippers.shipperID
+GROUP BY shippers.companyName;
+```
+Output:
+| Avg Freight Fee|
+|-----------|
+|![shipper fee](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/0c688088-57f4-450a-9dcc-9685b78cbda2)|
+
+## Insights:
+
+- Among the three shipping providers, Speedy Express has the lowest average freight cost at $65.001 per shipment, while United Package has the highest average freight cost at $86.640 per shipment.
+
+Federal Shipping falls in between the other two providers, with an average freight cost of $80.441 per shipment.
+
+## Recommendations:
+
+- Analyze the shipping cost breakdown provided by each shipping provider. Look into factors such as distance, package weight, delivery speed, and any additional services or surcharges included in the freight cost. This analysis will help identify any discrepancies or variations in the cost structure.
+
+- Consider factors such as delivery time, reliability, package handling, customer support, and overall customer satisfaction. While cost is essential, it should be balanced with the quality and reliability of the shipping service.
+
+- Engage in discussions with each provider to understand their pricing structure, any available promotions, and the possibility of establishing long-term partnerships that offer cost advantages.
+
+- Track metrics such as on-time delivery, package condition upon arrival, and any instances of lost or damaged shipments. Consistently assess the reliability and effectiveness of the shipping providers to ensure they meet your company's standards and customer expectations.
+---
+```sql
+---KPIs
+--1. Total Number of Orders
+SELECT COUNT(DISTINCT orderID) AS TotalOrders
+FROM orders;
+```
+|TotalOrders|
+|-----------|
+|830|
+
+```sql
+--2. Total Revenue
+SELECT ROUND(SUM(unitPrice * quantity * (1 - discount)), 2) AS TotalRevenue
+FROM order_details;
+```
+|TotalRevenue|
+|-----------|
+|1265793.04|
+
+```sql
+--3. Average Order Value
+SELECT ROUND(AVG(unitPrice * quantity * (1 - discount)), 2) AS AverageOrderValue
+FROM order_details;
+```
+|AverageOrderValue|
+|-----------|
+|587.37|
+
+```sql
+--4. Number of Customers
+SELECT COUNT(DISTINCT customerID) AS CustomerCount
+FROM customers;
+```
+|CustomerCount|
+|-----------|
+|91|
+
+```sql
+--5. Number of Products
+SELECT COUNT(DISTINCT productID) AS ProductCount
+FROM products;
+```
+|ProductCount|
+|-----------|
+|77|
 
