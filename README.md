@@ -543,8 +543,17 @@ Output:
 
 -----
 ```sql
-
+--- 4. How does the freight cost vary across different regions or countries?
+SELECT c.country, AVG(o.freight) AS average_freight_cost
+FROM orders o
+JOIN customers c 
+ ON o.customerID = c.customerID
+GROUP BY c.country;
 ```
+Output:
+|Avg Freight per Country |
+|-----------|
+| |
 
 Can we identify any seasonal trends in sales? Are there specific months or periods where sales are consistently higher?
 Is there a relationship between the discount offered and the quantity of products ordered?
