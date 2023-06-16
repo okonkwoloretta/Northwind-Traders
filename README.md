@@ -290,7 +290,7 @@ Output:
 |customerID|	avg_order_quantity
 |-----------|---------------------|
 BLONP|	25|
-SEVES|	31|
+SEVES|	31||-----------|---------------------|
 OLDWO|	25|
 THEBI|	6|
 FRANS|	5|
@@ -442,11 +442,105 @@ It is important to note that other factors, such as the distance of shipping, sh
 
 If we consider the average order quantity and average freight cost per unit quantity among the customers, there don't seem to be any customers who stand out as extreme or unusual compared to the rest. The values for these metrics vary to some extent, indicating natural differences in customer ordering patterns and associated freight costs. However, there are no clear indications of customers with significantly higher or lower values that would be considered outliers.
 
+--------
 2. Perform exploratory data analysis (EDA) like answering some questions to drive insights from our dataset:
 
-- Which products have the highest sales revenue? Are there any specific product categories that contribute significantly to the overall revenue?
-What is the distribution of order quantities? Are there any patterns or trends?
-Which customers have the highest number of orders? Are there any loyal or frequent customers?
+```sql
+--- 1. Which products have the highest sales revenue? Are there any specific product categories that contribute significantly to the overall revenue?
+
+SELECT TOP (10) p.productName, c.categoryName, ROUND(SUM(od.unitPrice * od.quantity), 2) AS totalRevenue
+FROM products p
+INNER JOIN categories c 
+  ON p.categoryID = c.categoryID
+INNER JOIN order_details od 
+  ON p.productID = od.productID
+GROUP BY p.productID, p.productName, c.categoryName
+ORDER BY totalRevenue DESC;
+```
+
+Output:
+
+|Sales Rev by Products|
+|-----------|
+|![revenue by products](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/da4e8663-437c-4381-85a7-de80aa1d2a81)|
+
+
+## Insights:
+
+The top-selling products along with their corresponding categories and total sales revenue
+- Côte de Blaye - Category: Beverages, Total Revenue: $149,984.2
+- Thüringer Rostbratwurst - Category: Meat & Poultry, Total Revenue: $87,736.4
+- Raclette Courdavault - Category: Dairy Products, Total Revenue: $76,296
+- Tarte au sucre - Category: Confections, Total Revenue: $49,827.9
+- Gnocchi di nonna Alice - Category: Grains & Cereals, Total Revenue: $45,121.2
+- Manjimup Dried Apples - Category: Produce, Total Revenue: $44,742.6
+- Carnarvon Tigers - Category: Seafood, Total Revenue: $31,987.5
+
+These products contribute significantly to the overall revenue.
+
+## Recommendations:
+
+- On Beverage Category: The product "Côte de Blaye" generates the highest revenue. Consider increasing marketing efforts, expanding the product range, or exploring opportunities for partnerships or collaborations within the beverage category to further capitalize on its success.
+
+- Enhance Meat & Poultry: The "Thüringer Rostbratwurst" and "Alice Mutton" are popular choices, consider introducing new meat and poultry products, improving product quality, or offering special promotions to attract more customers and increase sales within this category.
+
+- Dairy Products: "Raclette Courdavault" and "Camembert Pierrot" are top-selling products. Develop targeted marketing campaigns to highlight the unique features, taste, and quality of these products. Consider collaborating with local cheese producers or organizing tasting events to increase customer awareness and drive sales.
+
+- Confections and Grains & Cereals: "Tarte au sucre" and "Gnocchi di nonna Alice" are performing well in the Confections and Grains & Cereals categories, respectively. Consider expanding the product range in these categories, introducing new flavors or variations, and promoting them through appealing packaging, social media campaigns, or collaborations with influencers or food bloggers.
+
+- Produce and Seafood: "Manjimup Dried Apples" and "Carnarvon Tigers" represent the Produce and Seafood categories. Ensure a steady supply of fresh produce and high-quality seafood products. Explore partnerships with local farmers and fishermen to source fresh and unique products, and educate customers about the freshness, sustainability, and health benefits of these products.
+
+Monitor/Adjust: Continuously track sales performance, customer feedback, and market trends for all product categories. Identify emerging patterns and adjust your product strategy accordingly. Regularly evaluate the profitability and popularity of each product to make informed decisions about inventory management, pricing, and promotions.
+
+```sql
+--- 2. What is the distribution of order quantities? Are there any patterns or trends?
+SELECT quantity, COUNT(*) AS frequency
+FROM order_details
+GROUP BY quantity
+ORDER BY quantity;
+```
+Output:
+|Order of quantity|
+|---------------------|
+|![frequency by quantity](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/34e6b0a5-6062-4423-ae6a-3f60e58bc70d)|
+
+
+Most common order quantities: The order quantities of 10, 20, and 30 appear frequently in the dataset, with 181, 252, and 194 occurrences respectively. This suggests that these quantities are popular among customers.
+
+Small order quantities: There is a range of small order quantities, ranging from 1 to 9, which have relatively low frequencies. This indicates that while some customers place smaller orders, they are not as common as larger order quantities.
+
+Large order quantities: There are also some relatively large order quantities in the dataset, such as 40, 50, 60, and 100, with 113, 75, 58, and 10 occurrences respectively. These larger order quantities may represent bulk orders or orders from commercial customers
+
+-----
+
+```sql
+--- 3. Which customers have the highest number of orders? Are there any loyal or frequent customers?
+SELECT c.customerID, c.companyName, COUNT(o.orderID) AS orderCount
+FROM customers c
+INNER JOIN orders o 
+  ON c.customerID = o.customerID
+GROUP BY c.customerID, c.companyName
+ORDER BY orderCount DESC;
+```
+Output:
+|Total Orders by Customers|
+|---------------------|
+|![Orders by customers](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/38982cee-b14b-41a6-8224-c316999d0c6a)|
+
+## Insights:
+- customer with the highest number of orders is "SAVEA" with 31 orders.
+- The top 10 customers with the highest order counts range from 31 to 15 orders.
+- There are several customers with relatively lower order counts, ranging from 15 to 2 orders.
+
+## Recommendations:
+
+- Focus on retaining loyal and frequent customers, such as "SAVEA," "ERNSH," and "QUICK," who consistently place a high number of orders. Offer them incentives, personalized promotions, or exclusive benefits to encourage their continued loyalty.
+- Identify the reasons behind the lower order counts for customers with 15 or fewer orders. Reach out to these customers to gather feedback, understand their needs and preferences, and find ways to enhance their experience to increase their order frequency.
+- Consider implementing a customer loyalty program to incentivize repeat purchases and encourage customers to increase their order counts. Rewards, discounts, or exclusive perks can be offered to customers based on their order frequency and total spending.
+- Analyze the purchasing patterns and behaviors of the top customers to identify potential cross-selling or upselling opportunities. Recommend related or complementary products to these customers to maximize their order value.
+- Implement targeted marketing campaigns or personalized recommendations based on customers' past orders to increase engagement and encourage repeat purchases.
+
+
 Is there a correlation between the unit price of a product and its sales quantity?
 How does the freight cost vary across different regions or countries?
 Can we identify any seasonal trends in sales? Are there specific months or periods where sales are consistently higher?
@@ -454,3 +548,4 @@ Is there a relationship between the discount offered and the quantity of product
 Are there any outliers in terms of order quantities or sales revenue?
 What is the average shipping time for orders?
 Can we identify any sales trends or patterns over time?
+|-----------|---------------------|
