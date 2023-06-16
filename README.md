@@ -142,7 +142,8 @@ Output:
 |--------------|--------------|--------------|--------------|
 |![duplicate orders](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/e18cbcd2-a798-4660-be93-861153fd1b04)|![duplicate products](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/d72846a5-2f3a-4f26-88c0-ac8b80711ffb)|![duplicate shippers](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/83c3f45e-bc84-447a-906f-1e4db5c28130)|![duplicate categories ](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/8d164e7f-962b-4ae1-a759-b4531b274959)|
    
-Hint: Our dataset has been carefully cleaned and processed to ensure high data quality. We have taken steps to remove any missing values, ensuring that all the required information is present for each record. Additionally, we have meticulously checked for and eliminated any duplicate entries, ensuring that each entry in the dataset is unique. By addressing these issues, we can confidently state that our data is complete and free from any missing values or duplicate records.
+## Insight:  
+ Our dataset has been carefully cleaned and processed to ensure high data quality. We have taken steps to remove any missing values, ensuring that all the required information is present for each record. Additionally, we have meticulously checked for and eliminated any duplicate entries, ensuring that each entry in the dataset is unique. By addressing these issues, we can confidently state that our data is complete and free from any missing values or duplicate records.
 
 ------
 
@@ -186,7 +187,7 @@ Output:
 |--------------|--------------|--------------|
 ![datatype order details](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/d069b2af-0347-4fac-b287-c15a5c178ce1)|![datatype customers](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/93a196d4-442c-4dcb-b182-84e765362836)|![datatype employees](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/2596a8fa-6c75-4c8d-9d08-d16e97645f0c)|
 
-Hint:
+## Insight:
 Our dataset has been carefully structured and validated to ensure that each column contains data in the appropriate format. We have taken the necessary steps to verify that all data types are correctly assigned to their respective columns. By ensuring the data is in its correct data type, we can confidently analyze and interpret the dataset accurately.
 
 ------------------
@@ -268,8 +269,7 @@ Output:
 11032|	WHITC|	2015-04-17|	25|	263.5|	                606.190002441406
 11032|	WHITC|	2015-04-17|	30|	55|	                606.190002441406
 
-Hint: 
-
+## Insight: 
 Customer "QUEEN" has multiple orders with varying quantities, such as 12, 40, 70, and 42.
 Customer "ERNSH" also has orders with quantities like 45, 50, 30, and 70.
 Customer "RATTC" has orders with quantities such as 30, 28, 60, and 30.
@@ -490,9 +490,7 @@ These products contribute significantly to the overall revenue.
 - Confections and Grains & Cereals: "Tarte au sucre" and "Gnocchi di nonna Alice" are performing well in the Confections and Grains & Cereals categories, respectively. Consider expanding the product range in these categories, introducing new flavors or variations, and promoting them through appealing packaging, social media campaigns, or collaborations with influencers or food bloggers.
 
 - Produce and Seafood: "Manjimup Dried Apples" and "Carnarvon Tigers" represent the Produce and Seafood categories. Ensure a steady supply of fresh produce and high-quality seafood products. Explore partnerships with local farmers and fishermen to source fresh and unique products, and educate customers about the freshness, sustainability, and health benefits of these products.
-
-Monitor/Adjust: Continuously track sales performance, customer feedback, and market trends for all product categories. Identify emerging patterns and adjust your product strategy accordingly. Regularly evaluate the profitability and popularity of each product to make informed decisions about inventory management, pricing, and promotions.
-
+----
 ```sql
 --- 2. What is the distribution of order quantities? Are there any patterns or trends?
 SELECT quantity, COUNT(*) AS frequency
@@ -581,9 +579,55 @@ There is significant variation in average freight costs across different countri
 - Benchmark average freight costs against industry standards and competitors to gauge competitiveness and identify areas for improvement.
 - Continuously track and analyze customer demand and order patterns in different countries to optimize inventory management and minimize costly shipping methods.
 ---------
-Can we identify any seasonal trends in sales? Are there specific months or periods where sales are consistently higher?
-Is there a relationship between the discount offered and the quantity of products ordered?
-Are there any outliers in terms of order quantities or sales revenue?
-What is the average shipping time for orders?
-Can we identify any sales trends or patterns over time?
-|-----------|---------------------|
+
+```sql
+--- 5. Can we identify any seasonal trends in sales? Are there specific months or periods where sales are consistently higher?
+SELECT
+    DATEPART(MONTH, o.orderDate) AS salesMonth,
+    SUM(od.quantity) AS totalQuantity,
+    ROUND(SUM(od.quantity * od.unitPrice),2) AS totalSales
+FROM
+    orders o
+    JOIN order_details od ON o.orderID = od.orderID
+GROUP BY
+    DATEPART(MONTH, o.orderDate)
+ORDER BY
+    totalSales DESC;
+```
+Output:
+|   Seasonal Trends in Sales|
+|-----------|
+|  ![Sales trend by month](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/ef33eed0-2cb9-41f2-94ae-3e72d40efb8e)|
+
+## Insights:
+Seasonal Sales Patterns Month 4 (April), 1 (January), 3 (March), 2 (February), and 12 (December) exhibit higher sales compared to the remaining month, with 6,592 units sold and $190,329.95 in sales in April, and 4,882 units sold and $128,429.66 in sales in December.  These months may be influenced by seasonal factors, holidays, or specific events that drive customer demand.
+
+## Recommendations:
+
+- Allocate additional resources and marketing efforts during the months of April, January, March, February, and December to maximize sales potential. Identify specific marketing strategies or promotions that align with the seasonal trends and customer preferences during these months.
+
+- Conduct a deeper analysis to understand the factors contributing to higher sales in these specific months. Consider external factors such as holidays, cultural events, or industry-specific trends that could impact customer buying behavior. This analysis will help tailor your marketing and sales strategies accordingly
+
+-----
+```sql
+--- 6. Can we identify any sales trends or patterns over time?
+SELECT
+    YEAR(o.orderDate) AS salesYear,
+    MONTH(o.orderDate) AS salesMonth,
+    ROUND(SUM(od.quantity * od.unitPrice * (1 - od.discount)), 2) AS monthlySales
+FROM
+    orders o
+    JOIN order_details od ON o.orderID = od.orderID
+GROUP BY
+    YEAR(o.orderDate),
+    MONTH(o.orderDate)
+ORDER BY
+    salesYear, salesMonth;
+```
+
+Output:
+
+| Yearly Sales Trend|
+|-----------|
+![yearly sales](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/6b485bd0-f63f-42ac-93a6-973b4217f7d4)
+
