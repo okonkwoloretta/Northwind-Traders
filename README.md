@@ -462,7 +462,8 @@ Output:
 
 |Sales Rev by Products|
 |-----------|
-|![revenue by products](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/da4e8663-437c-4381-85a7-de80aa1d2a81)|
+|![revenue by products](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/8e76f20f-8df8-4ebc-a8a0-fa26d9efb9a9)|
+
 
 
 ## Insights:
@@ -525,7 +526,7 @@ ORDER BY orderCount DESC;
 Output:
 |Total Orders by Customers|
 |---------------------|
-|![Orders by customers](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/38982cee-b14b-41a6-8224-c316999d0c6a)|
+|![Orders by customers](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/890e75d6-3b3f-4b11-9ddd-332a4f47a6c2)|
 
 ## Insights:
 - customer with the highest number of orders is "SAVEA" with 31 orders.
@@ -540,9 +541,11 @@ Output:
 - Analyze the purchasing patterns and behaviors of the top customers to identify potential cross-selling or upselling opportunities. Recommend related or complementary products to these customers to maximize their order value.
 - Implement targeted marketing campaigns or personalized recommendations based on customers' past orders to increase engagement and encourage repeat purchases.
 
+-----
+```sql
 
-Is there a correlation between the unit price of a product and its sales quantity?
-How does the freight cost vary across different regions or countries?
+```
+
 Can we identify any seasonal trends in sales? Are there specific months or periods where sales are consistently higher?
 Is there a relationship between the discount offered and the quantity of products ordered?
 Are there any outliers in terms of order quantities or sales revenue?
