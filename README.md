@@ -267,3 +267,188 @@ Output:
 11032|	WHITC|	2015-04-17|	35|	19|	                606.190002441406
 11032|	WHITC|	2015-04-17|	25|	263.5|	                606.190002441406
 11032|	WHITC|	2015-04-17|	30|	55|	                606.190002441406
+
+Hint: 
+
+Customer "QUEEN" has multiple orders with varying quantities, such as 12, 40, 70, and 42.
+Customer "ERNSH" also has orders with quantities like 45, 50, 30, and 70.
+Customer "RATTC" has orders with quantities such as 30, 28, 60, and 30.
+Other customers like "SAVEA," "QUICK," "GREAL," "FOLIG," "HUNGO," and "WHITC" also show varying order quantities.
+
+To further investigate if the high freight values are justified by the large order sizes, let's calculate the average order quantity for each customer and compare it to the overall average order quantity. This will help determine if certain customers consistently place larger orders than others. And also analyze the relationship between the order quantity and the freight cost by calculating metrics such as the average freight cost per unit quantity for each customer. This will provide insights into whether customers with higher order quantities also tend to have higher freight costs per unit.
+
+```sql
+-- Calculate average order quantity for each customer
+SELECT TOP (20) customerID, AVG(quantity) AS avg_order_quantity
+FROM orders o
+INNER JOIN order_details od 
+ON o.orderID = od.orderID
+GROUP BY customerID
+```
+Output:
+
+|customerID|	avg_order_quantity
+|-----------|---------------------|
+BLONP|	25|
+SEVES|	31|
+OLDWO|	25|
+THEBI|	6|
+FRANS|	5|
+MAGAA|	20|
+SIMOB|	25|
+ALFKI|	14|
+FAMIA|	18|
+LAZYK|	10|
+GROSR|	8|
+FOLKO|	27|
+CHOPS|	21|
+ERNSH|	44|
+FRANK|	31|
+HILAA|	24|
+CENTC|	5|
+ISLAT|	12|
+GOURL|	16|
+BERGS|	19|
+
+```sql
+-- Calculate overall average order quantity
+SELECT AVG(quantity) AS overall_avg_order_quantity
+FROM orders o
+INNER JOIN order_details od 
+ON o.orderID = od.orderID;
+```
+Output:
+
+|overall_avg_order_quantity|
+|-----------|
+|23|
+
+```sql
+-- Calculate average freight cost per unit quantity for each customer
+SELECT customerID, AVG(freight / quantity) AS avg_freight_per_unit
+FROM orders o
+INNER JOIN order_details od 
+ON o.orderID = od.orderID
+GROUP BY customerID
+ORDER BY avg_freight_per_unit desc
+```
+
+Output:
+
+|customerID|	avg_freight_per_unit|
+|-------------|----------|
+FOLIG|	20.7103186530762|
+QUEEN|	9.59296674097436|
+ERNSH|	9.30343513452964|
+RANCH|	9.09067650144062|
+SIMOB|	8.49795695269045|
+BERGS|	8.18355692328988|
+THEBI|	8.02728563036237|
+OCEAN|	8.00287884798917|
+SANTG|	7.89765802704626|
+ALFKI|	7.41343236187148
+SPECD|	7.21396010678912|
+SAVEA|	7.12864017452832|
+GREAL|	7.10003620519439|
+QUICK|	6.8855187372951|
+HUNGO|	6.78914775451192|
+MORGK|	6.63430287521897|
+SPLIR|	6.55971498553715|
+FOLKO|	6.5533369800153|
+ANATR|	6.45811898935409|
+THECR|	6.44931263128916|
+LETSS|	6.42166311400277|
+PICCO|	6.2766365140911|
+RATTC|	6.27302221364632|
+TORTU|	6.20738032311772|
+WHITC|	5.94930917333421|
+GROSR|	5.87587507963181|
+EASTC|	5.66431761562148|
+PRINI|	5.64222787947882|
+LEHMS|	5.55300410500085|
+OLDWO|	5.49672612203492|
+PERIC|	5.47009517901034|
+RICAR|	5.43460615612772|
+MEREP|	5.12856921760547|
+RICSU|	5.09585673753547|
+ISLAT|	5.01626710264826|
+SEVES|	4.96380133903216|
+WARTH|	4.72429268979236|
+OTTIK|	4.70975591849028|
+BONAP|	4.70011752281354|
+DRACD|	4.63758019159711|
+VICTE|	4.63595503838857|
+GODOS|	4.51135323485757|
+TRAIH|	4.47061625653894|
+VAFFE|	4.4551530974496|
+BLONP|	4.32951046093043|
+MAGAA|	4.25174936383219|
+MAISD|	4.17045765617648|
+FRANR|	4.11346033565582|
+QUEDE|	4.10177161062048|
+AROUT|	4.09769587221221|
+LACOR|	4.07922939398362|
+FRANK|	4.0514938414045|
+LAMAI|	3.95788834718973|
+SUPRD|	3.89430667833513|
+FURIB|	3.89104281904206|
+ROMEY|	3.88992866050629|
+HILAA|	3.87669793385803|
+TRADH|	3.82604494778228|
+KOENE|	3.82034633334573|
+COMMI|	3.78804990824726|
+WOLZA|	3.62321433935847|
+LILAS|	3.61476854246304|
+GOURL|	3.55474061701531|
+WELLI|	3.48872051119879|
+HANAR|	3.48581958329157|
+NORTS|	3.45354164226188|
+BLAUS|	3.40618706989248|
+CONSH|	3.29923479475943|
+WANDK|	3.25686987306318|
+LONEP|	3.08327800157119|
+BOTTM|	3.06952907636006|
+HUNGC|	3.06863233271651|
+BSBEV|	3.04926408867299|
+BOLID|	2.89346936013964|
+LINOD|	2.71784652998875|
+REGGC|	2.55386850784545|
+CHOPS|	2.4955247463903|
+ANTON|	2.43770491342919|
+WILMK|	2.34075490838172|
+FRANS|	2.27652498006821|
+CACTU|	1.91732789384467|
+DUMON|	1.89344794851131|
+VINET|	1.8917794068749|
+CENTC|	1.7875|
+FAMIA|	1.66215377822954|
+GALED|	1.5707500398159|
+TOMSP|	1.34988522051143|
+LAZYK|	0.970000004768372|
+LAUGB|	0.544258927447455|
+
+
+
+
+
+we can observe the following:
+
+- The average order quantity varies among customers, ranging from 5 to 44 units. This indicates that certain customers consistently place larger orders compared to others.
+
+- The overall average order quantity for all customers is 23 units. Comparing individual customers' average order quantities to this overall average can provide insights into their ordering patterns.
+
+- The average freight cost per unit quantity also varies among customers, ranging from 0.97 to 9.30. This metric helps assess the relationship between order quantity and freight cost.
+
+
+
+
+
+There is variation in the average freight cost per unit quantity among customers. Some customers have relatively low average costs, while others have higher average costs.
+
+Customers such as LAUGB and FAMIA have very low average freight costs per unit quantity, indicating that their shipping costs are generally low compared to the quantity of products ordered.
+
+On the other hand, customers like FOLIG have a significantly higher average freight cost per unit quantity, suggesting that their shipping costs are relatively high compared to the quantity of products ordered.
+
+There are customers with moderate average freight costs per unit quantity, such as BLONP, SEVES, OLDWO, MAGAA, etc.
+
+It is important to note that other factors, such as the distance of shipping, shipping methods, packaging, and other logistical considerations, may also impact the freight costs. These factors are not taken into account in the provided data.
