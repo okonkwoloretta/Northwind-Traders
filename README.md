@@ -553,8 +553,34 @@ GROUP BY c.country;
 Output:
 |Avg Freight per Country |
 |-----------|
-| |
+|![Freight cost per country](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/064d6204-951d-4446-9f13-e18d6dd9d88b)|
 
+## Insights:
+
+There is significant variation in average freight costs across different countries. 
+- The highest average freight cost is observed in Austria (184.79), while the lowest is in Poland (25.11).
+
+- European countries like Austria, Ireland, Germany, Sweden, Denmark, Switzerland, Belgium, and Portugal have relatively higher average freight costs compared to other regions.
+
+- North American countries like the USA and Canada also have relatively high average freight costs but are lower compared to some European countries.
+
+- South American countries like Venezuela, Brazil, and Argentina have moderate average freight costs.
+
+- Countries like France, the UK, Norway, Finland, Mexico, Spain, Italy, and Poland have relatively lower average freight costs.
+
+## Recommendations:
+
+- Identify the factors contributing to higher freight costs in countries like Austria, Ireland, and Germany.
+- Analyze the transportation infrastructure, customs procedures, and logistics networks to identify potential areas for optimization and cost reduction.
+- Explore opportunities for negotiation or collaboration with shipping companies or freight forwarders in countries with high average freight costs. 
+- Seek competitive rates and optimize shipping routes to reduce costs.
+- Monitor and analyze freight cost trends over time for each country. 
+- Identify any patterns or fluctuations that may impact cost optimization strategies.
+- Consider regional or localized distribution centers in countries with higher average freight costs to reduce transportation distances and costs.
+- Evaluate the impact of trade agreements, tariffs, and customs regulations on freight costs in different countries. Stay updated with changes in trade policies that may affect shipping costs and adjust strategies accordingly.
+- Benchmark average freight costs against industry standards and competitors to gauge competitiveness and identify areas for improvement.
+- Continuously track and analyze customer demand and order patterns in different countries to optimize inventory management and minimize costly shipping methods.
+---------
 Can we identify any seasonal trends in sales? Are there specific months or periods where sales are consistently higher?
 Is there a relationship between the discount offered and the quantity of products ordered?
 Are there any outliers in terms of order quantities or sales revenue?
