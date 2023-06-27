@@ -790,3 +790,7 @@ FROM products;
 |-----------|
 |77|
 
+## Dashboard View
+
+![northwind frame](https://github.com/okonkwoloretta/Northwind-Traders/assets/116097143/bad457fa-f296-44f5-a9be-a5ce9d9b44a5)
+
